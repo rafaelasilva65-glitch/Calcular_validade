@@ -17,8 +17,29 @@ spec = FlaskPydanticSpec('flask',
                          version='1.0.0')
 spec.register(app)
 
-@app.route('/validade/<quantidade>, <prazo>')
+@app.route('/validade/<data_informada/<int:quantidade>/<prazo-*>')
 def validado(quantidade, prazo):
+    """
+        **API para calcular cashback**
+
+        ##ENdpoint:
+        GET/validade
+
+        ## Parámetros
+        {
+            "produto": "Arroz",
+            "prazo": "26/07/2026","
+
+        }
+
+        ## Resposta (JSON)
+        {
+                "validade: "26/07/2026 12:43:41",
+                "data_transacao_iso": "2026-07-26T12:43:41",
+                "produto": "Arroz",
+            }
+
+        """
     prazo = int(prazo)
     quantidade = int(quantidade)
     meses = datetime.today()+relativedelta(months=prazo)
